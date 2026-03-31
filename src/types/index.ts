@@ -9,6 +9,7 @@ export interface Product {
   supplier: string;
   lastRestocked: string;
   status: 'in-stock' | 'low-stock' | 'out-of-stock';
+  image?: string;
 }
 
 export interface Transaction {
@@ -63,4 +64,28 @@ export interface Report {
   generatedAt: string;
   format: 'csv' | 'pdf';
   status: 'generating' | 'ready' | 'failed';
+}
+
+export interface Supplier {
+  id: string;
+  name: string;
+  contactPerson: string;
+  email: string;
+  phone: string;
+  address: string;
+  productsSupplied: number;
+  totalOrders: number;
+  rating: number;
+  status: 'active' | 'inactive';
+}
+
+export interface AuditLog {
+  id: string;
+  action: string;
+  entity: string;
+  entityId: string;
+  entityName: string;
+  user: string;
+  timestamp: string;
+  details: string;
 }
