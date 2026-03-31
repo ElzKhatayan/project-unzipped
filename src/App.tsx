@@ -10,6 +10,9 @@ import Transactions from "./pages/Transactions";
 import Alerts from "./pages/Alerts";
 import Reports from "./pages/Reports";
 import MLInsights from "./pages/MLInsights";
+import Suppliers from "./pages/Suppliers";
+import AuditLog from "./pages/AuditLog";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,9 +28,12 @@ const App = () => (
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/transactions" element={<Transactions />} />
+            <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/alerts" element={<Alerts />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/ml-insights" element={<MLInsights />} />
+            <Route path="/audit-log" element={<AuditLog />} />
+            <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
