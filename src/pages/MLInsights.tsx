@@ -47,9 +47,6 @@ export default function MLInsights() {
           </h1>
           <p className="text-muted-foreground mt-1">AI-powered demand forecasting and stock optimization using ML.NET</p>
         </div>
-        <Button onClick={handleTrainModel}>
-          <Zap className="mr-2 h-4 w-4" /> Retrain Model
-        </Button>
       </div>
 
       {/* ML Stats */}

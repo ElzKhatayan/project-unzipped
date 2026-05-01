@@ -162,14 +162,6 @@ export function Layout({ children }: LayoutProps) {
             <NavLinks showLabels={!collapsed} />
           </nav>
           <div className="border-t p-3">
-            {!collapsed && (
-              <div className="rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 p-4 text-sm mb-3">
-                <p className="font-semibold text-primary">Backend Ready</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  ASP.NET Core + SignalR
-                </p>
-              </div>
-            )}
             <Button
               variant="ghost"
               size="sm"
