@@ -260,7 +260,7 @@ export default function Dashboard() {
               <TrendingUp className="h-5 w-5 text-success" />
               Monthly Revenue Trend
             </CardTitle>
-            <CardDescription>Revenue and order growth over the last 7 months</CardDescription>
+            <CardDescription>Revenue and sales growth over the last 7 months</CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={280}>
@@ -273,16 +273,13 @@ export default function Dashboard() {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(215, 20%, 88%)" />
                 <XAxis dataKey="month" stroke="hsl(215, 15%, 45%)" fontSize={12} />
-                <YAxis stroke="hsl(215, 15%, 45%)" fontSize={12} />
+                <YAxis stroke="hsl(215, 15%, 45%)" fontSize={12} tickFormatter={(v) => `$${v.toLocaleString()}`} />
                 <Tooltip
                   contentStyle={{ borderRadius: '8px', border: '1px solid hsl(215, 20%, 88%)' }}
-                  formatter={(value: number, name: string) => [
-                    name === 'revenue' ? `$${value.toLocaleString()}` : value,
-                    name === 'revenue' ? 'Revenue' : 'Orders'
-                  ]}
+                  formatter={(value: number) => [`$${value.toLocaleString()}`, 'Sales']}
                 />
                 <Legend />
-                <Area type="monotone" dataKey="revenue" stroke="hsl(142, 76%, 45%)" fillOpacity={1} fill="url(#colorRevenue)" strokeWidth={2} name="Revenue" />
+                <Area type="monotone" dataKey="revenue" stroke="hsl(142, 76%, 45%)" fillOpacity={1} fill="url(#colorRevenue)" strokeWidth={2} name="Sales" />
               </AreaChart>
             </ResponsiveContainer>
           </CardContent>
