@@ -174,7 +174,7 @@ export default function MLInsights() {
       <Card className="shadow-sm">
         <CardHeader>
           <CardTitle>Demand Forecasting</CardTitle>
-          <CardDescription>AI-powered predictions for next 30 days using ML.NET regression models</CardDescription>
+          <CardDescription>AI-powered predictions for next 30 days using SSA time-series forecasting</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           {predictions.map((pred) => (
