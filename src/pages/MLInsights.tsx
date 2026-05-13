@@ -2,23 +2,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Brain, TrendingUp, TrendingDown, Minus, AlertCircle, Zap, Target, BarChart3 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
 import { mockMLPredictions, demandForecastData, mlAccuracyHistory } from '@/lib/mockData';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  BarChart, Bar, Legend, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
+  BarChart, Bar, Legend,
   AreaChart, Area,
 } from 'recharts';
 
-const radarData = [
-  { subject: 'Accuracy', A: 89.5, fullMark: 100 },
-  { subject: 'Recall', A: 85, fullMark: 100 },
-  { subject: 'Precision', A: 91, fullMark: 100 },
-  { subject: 'F1 Score', A: 88, fullMark: 100 },
-  { subject: 'Coverage', A: 94, fullMark: 100 },
-  { subject: 'Speed', A: 96, fullMark: 100 },
+const forecastMetrics = [
+  { name: 'MAPE', value: 10.5, description: 'Mean Absolute Percentage Error' },
+  { name: 'MAE', value: 3.2, description: 'Mean Absolute Error (units)' },
+  { name: 'RMSE', value: 4.1, description: 'Root Mean Square Error (units)' },
+  { name: 'R²', value: 0.87, description: 'Coefficient of Determination' },
 ];
 
 export default function MLInsights() {
@@ -126,22 +123,27 @@ export default function MLInsights() {
           </Card>
         </motion.div>
 
-        {/* Model Performance Radar */}
+        {/* Forecasting Metrics */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
           <Card className="shadow-sm">
             <CardHeader>
-              <CardTitle>Model Performance Metrics</CardTitle>
-              <CardDescription>ML.NET model evaluation scores</CardDescription>
+              <CardTitle>Forecasting Metrics</CardTitle>
+              <CardDescription>SSA time-series model evaluation (30-day horizon)</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={280}>
-                <RadarChart data={radarData}>
-                  <PolarGrid stroke="hsl(215, 20%, 88%)" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: 'hsl(215, 15%, 45%)' }} />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10 }} />
-                  <Radar name="Model v3.0" dataKey="A" stroke="hsl(217, 91%, 60%)" fill="hsl(217, 91%, 60%)" fillOpacity={0.3} />
-                </RadarChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {forecastMetrics.map((metric) => (
+                  <div key={metric.name} className="flex items-center justify-between rounded-lg bg-secondary/40 p-3">
+                    <div>
+                      <p className="text-sm font-semibold">{metric.name}</p>
+                      <p className="text-xs text-muted-foreground">{metric.description}</p>
+                    </div>
+                    <div className="text-xl font-bold text-primary">
+                      {metric.name === 'R²' ? metric.value.toFixed(2) : metric.value + (metric.name === 'MAPE' ? '%' : '')}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </motion.div>
@@ -172,7 +174,7 @@ export default function MLInsights() {
       <Card className="shadow-sm">
         <CardHeader>
           <CardTitle>Demand Forecasting</CardTitle>
-          <CardDescription>AI-powered predictions for next 30 days using ML.NET regression models</CardDescription>
+          <CardDescription>AI-powered predictions for next 30 days using SSA time-series forecasting</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           {predictions.map((pred) => (
