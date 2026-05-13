@@ -123,22 +123,27 @@ export default function MLInsights() {
           </Card>
         </motion.div>
 
-        {/* Model Performance Radar */}
+        {/* Forecasting Metrics */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
           <Card className="shadow-sm">
             <CardHeader>
-              <CardTitle>Model Performance Metrics</CardTitle>
-              <CardDescription>ML.NET model evaluation scores</CardDescription>
+              <CardTitle>Forecasting Metrics</CardTitle>
+              <CardDescription>SSA time-series model evaluation (30-day horizon)</CardDescription>
             </CardHeader>
             <CardContent>
-              <ResponsiveContainer width="100%" height={280}>
-                <RadarChart data={radarData}>
-                  <PolarGrid stroke="hsl(215, 20%, 88%)" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: 'hsl(215, 15%, 45%)' }} />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10 }} />
-                  <Radar name="Model v3.0" dataKey="A" stroke="hsl(217, 91%, 60%)" fill="hsl(217, 91%, 60%)" fillOpacity={0.3} />
-                </RadarChart>
-              </ResponsiveContainer>
+              <div className="space-y-4">
+                {forecastMetrics.map((metric) => (
+                  <div key={metric.name} className="flex items-center justify-between rounded-lg bg-secondary/40 p-3">
+                    <div>
+                      <p className="text-sm font-semibold">{metric.name}</p>
+                      <p className="text-xs text-muted-foreground">{metric.description}</p>
+                    </div>
+                    <div className="text-xl font-bold text-primary">
+                      {metric.name === 'R²' ? metric.value.toFixed(2) : metric.value + (metric.name === 'MAPE' ? '%' : '')}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </motion.div>
