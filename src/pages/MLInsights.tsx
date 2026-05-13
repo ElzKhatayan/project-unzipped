@@ -11,13 +11,11 @@ import {
   AreaChart, Area,
 } from 'recharts';
 
-const radarData = [
-  { subject: 'Accuracy', A: 89.5, fullMark: 100 },
-  { subject: 'Recall', A: 85, fullMark: 100 },
-  { subject: 'Precision', A: 91, fullMark: 100 },
-  { subject: 'F1 Score', A: 88, fullMark: 100 },
-  { subject: 'Coverage', A: 94, fullMark: 100 },
-  { subject: 'Speed', A: 96, fullMark: 100 },
+const forecastMetrics = [
+  { name: 'MAPE', value: 10.5, description: 'Mean Absolute Percentage Error' },
+  { name: 'MAE', value: 3.2, description: 'Mean Absolute Error (units)' },
+  { name: 'RMSE', value: 4.1, description: 'Root Mean Square Error (units)' },
+  { name: 'R²', value: 0.87, description: 'Coefficient of Determination' },
 ];
 
 export default function MLInsights() {
